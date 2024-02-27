@@ -41,16 +41,24 @@ const pickColorBtnElm = document.getElementById("pickColorBtn");
 const inputColorElm = document.querySelector(".inputColor");
 const copyColorBtnElm = document.getElementById("copyBtn");
 const bodyElm = document.getElementById("bgId");
+const displayColorElm = document.querySelector("#displayColor");
 
 const pickRandomColor = () => {
   const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
   inputColorElm.value = randomColor;
+  displayColorElm.value = randomColor;
   bodyElm.style.backgroundColor = randomColor;
 };
 
 const copyColor = () => {
   navigator.clipboard.writeText(inputColorElm.value);
 };
+const changeColor = () => {
+  const value = displayColorElm.value;
+  inputColorElm.value = value;
+  bodyElm.style.backgroundColor = value;
+};
 
 pickColorBtnElm.addEventListener("click", pickRandomColor);
 copyColorBtnElm.addEventListener("click", copyColor);
+displayColorElm.addEventListener("input", changeColor);
